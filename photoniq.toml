@@ -3,3 +3,18 @@ name = "photoniq1"
 version = "0.0.2"
 description = "Description for function photoniq1"
 lang = "nextjs"
+
+[resource_settings]
+# CPU units: 1 CPU unit is equivalent to 1 physical CPU core, or 1 virtual core. 
+#            You can use decimal values like "0.1" (10% of 1 core) knowing that 
+#            the minimal value is "0.001". To prevent writing wrong decimal values, 
+#            you can use the "m" notation for millicores, for example, "0.1" is 
+#            equivalent to "100m", or even setting "2" which is equivalent to "2000m".
+cpu="1000m"
+
+# Mem units: limits for memory are measured in bytes. You can express memory as a 
+#            plain integer (without suffix) or as a fixed-point number using one of 
+#            these quantity suffixes: E, P, T, G, M, k. You can also use the power-of-two 
+#            (MebiBytes) equivalents: Ei, Pi, Ti, Gi, Mi, Ki. For example, the following 
+#            represent roughly the same value: 128974848, 129e6, 129M,  128974848000m, 123Mi
+mem="200M"

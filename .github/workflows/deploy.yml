@@ -18,31 +18,17 @@ jobs:
         with:
           path: ${{ env.REPO_PATH }}
       
-      # Publised version
-      # - name: Download Photoniq FaaS CLI
-      #   run: curl -L -o faas-cli.tar.gz https://macrometacorp.github.io/photoniq-faas-cli-docs/faas-1.0.0-x86_64-unknown-linux-musl.tar.gz
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'  
+
+      - name: Install Photoniq FaaS CLI via npm
+        run: npm install -g @macrometa/faas
+
+      - name: Verify CLI installation
+        run: faas --version  
       
-      # Experimental version
-      - name: Download Photoniq FaaS CLI
-        run: curl -L -o faas-cli.tar.gz https://dlozina-macrometa.github.io/demo6/faas-1.0.0-x86_64-unknown-linux-musl.tar.gz
-
-      - name: Verify Downloaded File
-        run: file faas-cli.tar.gz
-
-      - name: Check File Size
-        run: ls -lh faas-cli.tar.gz
-
-      - name: Extract Photoniq FaaS CLI
-        run: sudo tar -xzf faas-cli.tar.gz -C /usr/local/bin
-
-      - name: Make CLI executable
-        run: sudo chmod +x /usr/local/bin/faas
-      
-      # - name: Create .env file
-      #   run: |
-      #     echo "API_URL=${{ secrets.API_URL }}" >> /usr/local/bin/.env
-      #     echo "API_KEY=${{ secrets.API_KEY }}" >> /usr/local/bin/.env
-
       - name: List directory to verify does functions folder exist
         run: ls -l 
 
@@ -54,11 +40,11 @@ jobs:
           echo "Running Photoniq FaaS CLI..."
           export API_URL="${{ secrets.API_URL }}"
           export API_KEY="${{ secrets.API_KEY }}"
-          /usr/local/bin/faas remote deploy $(echo ${GITHUB_REPOSITORY##*/})
+          faas remote deploy $(echo ${GITHUB_REPOSITORY##*/})
 
       # - name: Run CLI and print output
       #   run: |
       #     echo "Running Photoniq FaaS CLI..."
       #     export API_URL="${{ secrets.API_URL }}"
       #     export API_KEY="${{ secrets.API_KEY }}"
-      #     /usr/local/bin/faas remote list
+      #     faas remote list
