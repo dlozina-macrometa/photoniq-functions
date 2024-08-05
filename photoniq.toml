@@ -1,5 +1,5 @@
 
-name = "photoniq1"
+name = "photoniq-functions"
 version = "0.0.2"
 description = "Description for function photoniq1"
 lang = "nextjs"
